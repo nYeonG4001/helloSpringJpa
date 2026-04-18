@@ -29,11 +29,6 @@
     </style>
 </head>
 
-<div style="margin-top: 40px; padding: 12px 0; border-top: 1px solid #ccc; font-size: 0.85em; color: #666; text-align: center;">
-    실습 수행 일시: <span th:text="${#temporals.format(#temporals.createNow(), 'yyyy년 MM월 dd일 HH:mm:ss')}"></span>
-    &nbsp;|&nbsp; 학번: 2371324 &nbsp;|&nbsp; 성명: 박하영
-</div>
-
 <body>
 
     <h1>새 상품 등록</h1>
@@ -141,6 +136,11 @@
         </div>
 
     </form>
+
+    <div style="margin-top: 40px; padding: 12px 0; border-top: 1px solid #ccc; font-size: 0.85em; color: #666; text-align: center;">
+        실습 수행 일시: <span th:text="${#temporals.format(#temporals.createNow(), 'yyyy년 MM월 dd일 HH:mm:ss')}"></span>
+        &nbsp;|&nbsp; 학번: 2371324 &nbsp;|&nbsp; 성명: 박하영
+    </div>
 
 </body>
 </html>
