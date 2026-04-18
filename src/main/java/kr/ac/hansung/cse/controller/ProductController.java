@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import kr.ac.hansung.cse.service.CategoryService;
 
 import java.util.List;
 
@@ -37,9 +38,11 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+    private final CategoryService categoryService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, CategoryService categoryService) {
         this.productService = productService;
+        this.categoryService = categoryService;
     }
 
 
@@ -48,9 +51,21 @@ public class ProductController {
     // ─────────────────────────────────────────────────────────────────
 
     @GetMapping
-    public String listProducts(Model model) {
-        List<Product> products = productService.getAllProducts();
+    public String listProducts(@RequestParam(required = false) String keyword,
+                               @RequestParam(required = false) Long categoryId,
+                               Model model) {
+        List<Product> products;
+        if (keyword != null && !keyword.isBlank()) {
+            products = productService.searchByName(keyword);
+        } else if (categoryId != null) {
+            products = productService.searchByCategory(categoryId);
+        } else {
+            products = productService.getAllProducts();
+        }
         model.addAttribute("products", products);
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("categoryId", categoryId);
         return "productList";
     }
 
