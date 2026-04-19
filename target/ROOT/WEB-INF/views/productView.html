@@ -30,6 +30,7 @@
         .btn-delete:hover { background: #c0392b; }
     </style>
 </head>
+
 <body>
 
     <h1>상품 상세 정보</h1>
@@ -57,7 +58,7 @@
 
         <div class="detail-row">
             <span class="detail-label">카테고리</span>
-            <span class="detail-value" th:text="*{category}">카테고리</span>
+            <span class="detail-value" th:text="${product.category != null ? product.category.name : '-'}">카테고리</span>
         </div>
 
         <div class="detail-row">
@@ -100,6 +101,11 @@
               onsubmit="return confirm('정말로 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다.');">
             <button type="submit" class="btn-delete">삭제</button>
         </form>
+    </div>
+
+    <div style="margin-top: 40px; padding: 12px 0; border-top: 1px solid #ccc; font-size: 0.85em; color: #666; text-align: center;">
+        실습 수행 일시: <span th:text="${#temporals.format(#temporals.createNow(), 'yyyy년 MM월 dd일 HH:mm:ss')}"></span>
+        &nbsp;|&nbsp; 학번: 2371324 &nbsp;|&nbsp; 성명: 박하영
     </div>
 
 </body>
